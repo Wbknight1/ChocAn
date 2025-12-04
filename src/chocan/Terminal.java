@@ -18,9 +18,9 @@ public class Terminal extends JFrame{
 	
 	DataCenter sys;
 	ACMEAccountingServices accounting;
-	JPanel loginScreen, memberScreen, managerScreen, providerScreen, serviceRequestScreen;
+	JPanel loginScreen, memberScreen, managerScreen, providerScreen, serviceRequestScreen, requestApprovalScreen;
 	Member currMember;
-	Provider currPovider;
+	Provider currProvider;
 	Manager currManager;
 
 	public Terminal() {
@@ -55,12 +55,15 @@ public class Terminal extends JFrame{
             	
             	switch (verifyLogin(nameField.getText(), userNumberField.getText())) {
                 case 1:
+                	currMember = getMember(nameField.getText(), userNumberField.getText());
                 	swapInterface(memberScreen);
                     break;
                 case 2:
+                	currProvider = getProvider(nameField.getText(), userNumberField.getText());
                 	swapInterface(providerScreen);
                     break;
                 case 3:
+                	currManager = getManager(nameField.getText(), userNumberField.getText());
                 	swapInterface(managerScreen);
                     break;
                 default:
@@ -73,11 +76,15 @@ public class Terminal extends JFrame{
         loginScreen.add(userNumberField);
         loginScreen.add(loginButton);
         
+        //Login screen end
+        
+        //Member screen set up
+        
         memberScreen = new JPanel();
         
         //Service request screen set up
         serviceRequestScreen = new JPanel();
-        String[] serviceTypeOptions = sys.SERVICENAMES;
+        String[] serviceTypeOptions = sys.SERVICE_NAMES;
         JComboBox<String> optionBox = new JComboBox<>(serviceTypeOptions);
         Provider[] providers = sys.getProviders();
         String[] providerNames = new String[providers.length];
@@ -94,7 +101,7 @@ public class Terminal extends JFrame{
         submitServiceRequestButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	
+            	sys.addPendingServiceRequest(currMember, (String) providerBox.getSelectedItem(), (String) optionBox.getSelectedItem());
                 swapInterface(memberScreen);
             }
         });
@@ -103,15 +110,13 @@ public class Terminal extends JFrame{
         
         //Service request screen end
         
-        JButton logoutButton = new JButton("Logout");
-        logoutButton.addActionListener(new ActionListener() {
+        JButton MemberLogoutButton = new JButton("Logout");
+        MemberLogoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 swapInterface(loginScreen);
             }
         });
-        
-        logoutButton.setBounds(0, 0, 80, 20);
         
         JButton serviceRequestButton = new JButton("Request Service");
         serviceRequestButton.addActionListener(new ActionListener() {
@@ -121,7 +126,7 @@ public class Terminal extends JFrame{
             }
         });
         serviceRequestButton.setBounds(0, 20, 140, 20);
-        memberScreen.add(logoutButton);
+        memberScreen.add(MemberLogoutButton);
         memberScreen.add(serviceRequestButton);
         
         JLabel status = new JLabel();
@@ -141,9 +146,76 @@ public class Terminal extends JFrame{
         //Provider screen set up
         
         providerScreen = new JPanel();
-        providerScreen.add(logoutButton);
+        
+        //Request Approval set up
+        requestApprovalScreen = new JPanel();
         
         
+        
+        JButton checkCardButton = new JButton("Check");
+        checkCardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currProvider.checkCard(currMember.getCard());
+            }
+        });
+        
+        requestApprovalScreen.add(checkCardButton);
+        
+        JButton approveButton = new JButton("Approve");
+        approveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                swapInterface(providerScreen);
+            }
+        });
+        
+        requestApprovalScreen.add(approveButton);
+        
+        JButton declineButton = new JButton("Decline");
+        declineButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                swapInterface(providerScreen);
+            }
+        });
+        
+        requestApprovalScreen.add(declineButton);
+        
+        //Request Approval end
+        
+        JButton ProviderLogoutButton = new JButton("Logout");
+        ProviderLogoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                swapInterface(loginScreen);
+            }
+        });
+        
+        providerScreen.add(ProviderLogoutButton);
+        
+        JButton approveRequestButton = new JButton("Approve/Decline Request");
+        
+        approveRequestButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                swapInterface(requestApprovalScreen);
+            }
+        });
+        
+        providerScreen.add(approveRequestButton);
+        
+        JLabel pendingServiceRequest = new JLabel();
+        
+        int ServiceRequestCount = fetchServiceRequestCount(currProvider);
+        if(ServiceRequestCount == 0) {
+        	pendingServiceRequest.setText("No Request!");
+        }
+        else {
+        	pendingServiceRequest.setText(accumulateRequest(currProvider));
+        }
+        
+        providerScreen.add(pendingServiceRequest);
         
         
         //Provider screen end
@@ -222,13 +294,39 @@ public class Terminal extends JFrame{
 	}
 	
 	/*
+	 * In this function, Call pendingServiceRequest from sys.
+	 * return how many times the specific provider shows up
+	 * in pendingServiceRequest.
+	 */
+	
+	private int fetchServiceRequestCount(Provider provider) {
+		int count = 0;
+		
+		return count;
+	}
+	
+	/*
 	 * In this function, Call getWeeklyProviderForm from sys.
-	 * for every time the member matches, use getInfo on
-	 * weeklyProviderForms and append it to return string 
+	 * for every time the member name matches, use getInfo on
+	 * weeklyProviderForms and append it to returnString 
 	 * followed by '+ "\n"' to get to next line
 	 */
 	
 	private String accumulateFees(Member member) {
+		String returnString = "";
+		
+		return returnString;
+		
+	}
+	
+	/*
+	 * In this function, Call pendingServiceRequest from sys.
+	 * for every time the provider name matches, use getInfo on
+	 * pendingServiceRequest and append it to returnString 
+	 * followed by '+ "\n"' to get to next line
+	 */
+	
+	private String accumulateRequest(Provider provider) {
 		String returnString = "";
 		
 		return returnString;
