@@ -2,32 +2,21 @@ package chocan;
 
 public class Member extends Person {
     private String email;  //
-    private String memberNumber; // Members unique ID
+    private MemberCard memberCard; //let all members have object member card
 
-    //Main Constructor
-    public Member(String firstName, String lastName, String phoneNumber, String address, String city, String state, String zipCode, String email, String memberNumber)
+    public Member(String firstName, String lastName, String phoneNumber, String address, String city, String state, String zipCode, String email, String number)
     {
         super(firstName, lastName, phoneNumber, address, city, state, zipCode);
         this.email = email;
-        this.memberNumber = memberNumber;
+        this.memberCard = new MemberCard(firstName, lastName, number);
     }
 
-    //Getters
     public String getEmail() {return email;}
-    //public String getMemberNumber(){ return idNumber;}
-
-    // Setters
     public void setEmail(String email) {this.email = email;}
-    public void setMemberNumber (String idNumber) { this.idNumber = idNumber;}
+    public MemberCard getCard() {return memberCard;}
     
-    // returnInfo returns member info for ACMEAccoutingServices.writeInfo()
     public String returnInfo() {
-    	return String.join("_", firstName, lastName, phoneNumber, address, city, state, zipCode, email, idNumber);
-    }
-
-    public String returnMember ()
-    {
-        return memberNumber;
+    	return firstName + "_" + lastName + "_" + phoneNumber  + "_" + address  + "_" + city + "_" +  state  + "_" + zipCode  + "_" + email + "_" + memberCard.getMemberNumber();
     }
 
 }

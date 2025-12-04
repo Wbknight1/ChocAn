@@ -1,19 +1,19 @@
-// MemberCard written by Lindsey Bowen
-// Small object linked to Member class
-// TODO: tie to Member in ACMEAccountingServices
-
 package chocan;
 
 public class MemberCard {
+    private String memberFirstName;
+    private String memberLastName;
     private String memberNumber;
 
-    public MemberCard(String memberNumber)
+    public MemberCard(String memberFirstName, String memberLastName, String memberNumber)
     {
+        this.memberFirstName = memberFirstName;
+        this.memberLastName = memberLastName;
         this.memberNumber = memberNumber;
 
     }
 
-    // Getters
+    public String getFirstName() { return memberFirstName;}
+    public String getLastName() { return memberLastName;}
     public String getMemberNumber() { return memberNumber;}
-
 }

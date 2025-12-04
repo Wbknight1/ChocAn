@@ -3,8 +3,8 @@ package chocan;
 import java.util.*;
 
 public class DataCenter extends readAndWritable{
-	public final String[] SERVICENAMES = {"CONSULTATION", "CONVERSATION", "EMERGENCY"};
-	public final Double[] ServiceFeesRate = {12.99, 8.99, 29.99};
+	public final String[] SERVICE_NAMES = {"CONSULTATION", "CONVERSATION", "EMERGENCY"};
+	public final Double[] SERVICE_FEE_RATES = {12.99, 8.99, 29.99};
 
     private Vector<Member> members = new Vector<>();
     private Vector<Member> suspendedMembers = new Vector<>();
@@ -13,6 +13,7 @@ public class DataCenter extends readAndWritable{
 
     private Vector<ProviderForm> weeklyProviderForms;
     private Vector<MemberServiceReport> allMemberServiceReports;
+    private Vector<ServiceRequest> pendingServiceRequest;
     
     public DataCenter() {
     	
@@ -87,8 +88,18 @@ public class DataCenter extends readAndWritable{
     	
     }
     
+    public ServiceRequest[] getPendingServiceRequest() {
+    	
+    	return pendingServiceRequest.toArray(new ServiceRequest[pendingServiceRequest.size()]);
+    	
+    }
+    
     public void addMember(String firstName, String lastName, String phoneNumber, String address, String city, String state, String zipCode, String email, String number) {
     	members.add(new Member(firstName, lastName, phoneNumber, address, city, state, zipCode, email, number));
+    }
+    
+    public void addPendingServiceRequest(Member member, String providerName, String serviceType) {
+    	pendingServiceRequest.add(new ServiceRequest(member, providerName, serviceType));
     }
     
     public boolean validMember(String name, String number) {
