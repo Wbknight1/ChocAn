@@ -27,7 +27,7 @@ public class Terminal extends JFrame{
             }
         });
         
-        JTextField nameField = new JTextField();
+        JTextField nameField = new JTextField(); 
         nameField.setBounds(140, 80, 100, 20);;
         JTextField userNumberField = new JTextField();
         userNumberField.setBounds(140, 100, 100, 20);;
@@ -54,7 +54,7 @@ public class Terminal extends JFrame{
 	//verifies member by using card info; name (formatted "first last") and number
 	
 	private boolean verifyLogin(String name, String number) {
-		
+		// We can use Member.java here
 		return false;
 	}
 	

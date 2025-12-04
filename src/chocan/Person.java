@@ -8,6 +8,7 @@ public class Person {
     protected String city;
     protected String state;
     protected String zipCode;
+    protected String idNumber;
 
     //Add getters setters and constructors
     public Person(String firstName, String lastName, String phoneNumber, String address, String city, String state, String zipCode)
