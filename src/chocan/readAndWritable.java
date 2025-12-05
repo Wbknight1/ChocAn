@@ -162,6 +162,7 @@ public abstract class readAndWritable {
     	
     }
     
+    // Edited by Wheeler Knight on 12/4/2025 - Fixed array bounds check from 7 to 8 to match actual data format
     protected Provider readProviderLine(String line) {
     	
     	String[] parts = line.split("_");
@@ -175,6 +176,7 @@ public abstract class readAndWritable {
     	
     }
     
+    // Edited by Wheeler Knight on 12/4/2025 - Fixed array bounds check from 7 to 8 to match actual data format
     protected Manager readManagerLine(String line) {
     	
     	String[] parts = line.split("_");

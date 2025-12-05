@@ -213,8 +213,9 @@ public class Provider extends Person {
         return firstName + " " + lastName;
     }
     
+    // Edited by Wheeler Knight on 12/4/2025 - Added providerNumber to output to match expected data format
     public String returnInfo() {
-    	return firstName + "_" + lastName + "_" + phoneNumber  + "_" + address  + "_" + city + "_" +  state  + "_" + zipCode;
+    	return firstName + "_" + lastName + "_" + phoneNumber  + "_" + address  + "_" + city + "_" +  state  + "_" + zipCode + "_" + providerNumber;
     }
 
 }

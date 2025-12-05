@@ -26,18 +26,65 @@ public class ACMEAccountingServices{
     	return suspendedMembers;
     }
     
+    // Edited by Wheeler Knight on 12/4/2025 - Fixed bug: was setting this.members instead of this.suspendedMembers
     public void setSuspendedMembers(Member[] suspendedMembers) {
     	this.suspendedMembers = suspendedMembers;
     }
     
+    // Edited by Wheeler Knight on 12/4/2025 - Implemented suspendMember functionality
     public void suspendMember(String number) {
     	for(int i = 0; i < members.length; i++) {
-    		if(members[i].getCard().getMemberNumber() == number) ;
+    		if(members[i].getCard().getMemberNumber().equals(number)) {
+    			// Add to suspended members array
+    			Member memberToSuspend = members[i];
+    			Member[] newSuspended = new Member[suspendedMembers.length + 1];
+    			System.arraycopy(suspendedMembers, 0, newSuspended, 0, suspendedMembers.length);
+    			newSuspended[suspendedMembers.length] = memberToSuspend;
+    			this.suspendedMembers = newSuspended;
+    			
+    			// Remove from active members array
+    			Member[] newMembers = new Member[members.length - 1];
+    			int idx = 0;
+    			for(int j = 0; j < members.length; j++) {
+    				if(j != i) {
+    					newMembers[idx++] = members[j];
+    				}
+    			}
+    			this.members = newMembers;
+    			
+    			System.out.println("Member suspended: " + memberToSuspend.getFirstName() + " " + memberToSuspend.getLastName());
+    			return;
+    		}
     	}
+    	System.out.println("Member not found with number: " + number);
     }
     
+    // Written by Wheeler Knight on 12/4/2025 - Implemented unsuspendMember functionality
     public void unsuspendMember(String number) {
-
+    	for(int i = 0; i < suspendedMembers.length; i++) {
+    		if(suspendedMembers[i].getCard().getMemberNumber().equals(number)) {
+    			// Add to active members array
+    			Member memberToUnsuspend = suspendedMembers[i];
+    			Member[] newMembers = new Member[members.length + 1];
+    			System.arraycopy(members, 0, newMembers, 0, members.length);
+    			newMembers[members.length] = memberToUnsuspend;
+    			this.members = newMembers;
+    			
+    			// Remove from suspended members array
+    			Member[] newSuspended = new Member[suspendedMembers.length - 1];
+    			int idx = 0;
+    			for(int j = 0; j < suspendedMembers.length; j++) {
+    				if(j != i) {
+    					newSuspended[idx++] = suspendedMembers[j];
+    				}
+    			}
+    			this.suspendedMembers = newSuspended;
+    			
+    			System.out.println("Member unsuspended: " + memberToUnsuspend.getFirstName() + " " + memberToUnsuspend.getLastName());
+    			return;
+    		}
+    	}
+    	System.out.println("Suspended member not found with number: " + number);
     }
     
     // Written by Wheeler Knight 12/04/2025

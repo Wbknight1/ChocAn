@@ -94,6 +94,7 @@ public class Terminal extends JFrame{
         JComboBox<String> optionBox = new JComboBox<>(serviceTypeOptions);
         Provider[] providers = sys.getProviders();
         String[] providerNames = new String[providers.length];
+        // Edited by Wheeler Knight on 12/4/2025 - Fixed typo: was getFirstName() + getFirstName(), now correctly uses getLastName()
         for(int i = 0; i < providers.length; i++) {
         	providerNames[i] = providers[i].getFirstName() + " " + providers[i].getLastName();
         }
@@ -135,6 +136,7 @@ public class Terminal extends JFrame{
         memberScreen.add(MemberLogoutButton);
         memberScreen.add(serviceRequestButton);
         
+        // Edited by Wheeler Knight on 12/4/2025 - Fixed NPE: removed fetchServiceReportCount() call from constructor (currMember is null before login)
         JLabel status = new JLabel("No Fees!");
         memberScreen.add(status);
         
@@ -202,15 +204,84 @@ public class Terminal extends JFrame{
         
         providerScreen.add(approveRequestButton);
         
+        // Edited by Wheeler Knight on 12/4/2025 - Fixed NPE: removed fetchServiceRequestCount() call from constructor (currProvider is null before login)
         JLabel pendingServiceRequest = new JLabel("No Request!");
         providerScreen.add(pendingServiceRequest);
         
         
         //Provider screen end
         
+        // Written by Wheeler Knight on 12/4/2025 - Implemented Manager Screen
+        managerScreen = new JPanel();
+        
+        JButton managerLogoutButton = new JButton("Logout");
+        managerLogoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                swapInterface(loginScreen);
+            }
+        });
+        managerScreen.add(managerLogoutButton);
+        
+        JButton requestServiceReportButton = new JButton("Request Service Report");
+        requestServiceReportButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (currManager != null) {
+                    currManager.RequestServiceReport(accounting);
+                    JOptionPane.showMessageDialog(Terminal.this, "Service Report generated. Check console output.", "Report Generated", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+        managerScreen.add(requestServiceReportButton);
+        
+        JButton requestSummaryReportButton = new JButton("Request Summary Report");
+        requestSummaryReportButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (currManager != null) {
+                    currManager.RequestSummaryReport(accounting);
+                    JOptionPane.showMessageDialog(Terminal.this, "Summary Report generated. Check console output.", "Report Generated", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+        managerScreen.add(requestSummaryReportButton);
+        
+        JButton viewAllMembersButton = new JButton("View All Members");
+        viewAllMembersButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                StringBuilder sb = new StringBuilder("=== All Members ===\n");
+                for (Member m : sys.getMembers()) {
+                    if (m != null) {
+                        sb.append(m.getFullName()).append(" - ").append(m.getCard().getMemberNumber()).append("\n");
+                    }
+                }
+                JOptionPane.showMessageDialog(Terminal.this, sb.toString(), "All Members", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        managerScreen.add(viewAllMembersButton);
+        
+        JButton viewAllProvidersButton = new JButton("View All Providers");
+        viewAllProvidersButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                StringBuilder sb = new StringBuilder("=== All Providers ===\n");
+                for (Provider p : sys.getProviders()) {
+                    if (p != null) {
+                        sb.append(p.getFullName()).append(" - ").append(p.getProviderNumber()).append("\n");
+                    }
+                }
+                JOptionPane.showMessageDialog(Terminal.this, sb.toString(), "All Providers", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        managerScreen.add(viewAllProvidersButton);
+        
+        //Manager screen end
+        
         this.add(memberScreen);
         this.add(providerScreen);
-//        this.add(managerScreen);
+        this.add(managerScreen);
         this.add(loginScreen);
         this.setSize(400, 400);
         this.setVisible(true);

@@ -54,7 +54,7 @@
 ## High Priority Features 🟠
 
 ### Terminal.java
-- [ ] **Implement Manager Screen**
+- [x] **Implement Manager Screen** ✅
   - Currently commented out (line 231)
   - Add UI components for:
     - Request Service Report button
@@ -64,25 +64,25 @@
     - Logout button
 
 ### ACMEAccountingServices.java
-- [ ] **Complete `suspendMember()` method**
+- [x] **Complete `suspendMember()` method** ✅
   - Remove member from `members` array
   - Add member to `suspendedMembers` array
   - Update data files
   
-- [ ] **Implement `unsuspendMember()` method**
+- [x] **Implement `unsuspendMember()` method** ✅
   - Remove member from `suspendedMembers` array
   - Add member to `members` array
   - Update data files
 
 ### Provider.java
-- [ ] **Fix `returnInfo()` to include provider number**
+- [x] **Fix `returnInfo()` to include provider number** ✅
   - Add `+ "_" + providerNumber` to the return string
 
 ### DataCenter.java
-- [ ] **Implement `getMemberByNumber()` method**
+- [x] **Implement `getMemberByNumber()` method** ✅
   - Mirror `getProviderByNumber()` functionality
   
-- [ ] **Add `getServiceFeeByCode()` utility method**
+- [x] **Add `getServiceFeeByCode()` utility method** ✅
   - Centralize service fee lookup logic
 
 ---
