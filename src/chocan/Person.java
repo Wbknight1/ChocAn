@@ -2,7 +2,6 @@
 Person class authored by Lindsey B
 Responsible for basic "actor" functions and info that Provider, Member, and 
 Manager will all inherit.
-Edited by Wheeler Knight on 12/4/2025 - Removed unused idNumber field, added base returnInfo()
  */
 
 package chocan;
