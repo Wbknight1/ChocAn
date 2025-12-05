@@ -209,9 +209,7 @@ public class Provider extends Person {
         this.password = password;
     }
     
-    public String getName() {
-        return firstName + " " + lastName;
-    }
+    // Edited by Wheeler Knight on 12/4/2025 - Removed duplicate getName() method, use inherited getFullName() instead
     
     // Edited by Wheeler Knight on 12/4/2025 - Added providerNumber to output to match expected data format
     public String returnInfo() {

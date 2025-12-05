@@ -178,7 +178,8 @@ public class ACMEAccountingServices{
                 String dateStr = sr.getServiceDate() != null ? sr.getServiceDate().toString() : "";
                 String providerName = "Unknown";
                 Provider prov = dataCenter.getProviderByNumber(sr.getProviderNumber());
-                if (prov != null) providerName = prov.getName();
+                // Edited by Wheeler Knight on 12/4/2025 - Changed to use getFullName() instead of duplicate getName()
+                if (prov != null) providerName = prov.getFullName();
                 String serviceName = "Unknown";
                 try {
                     int code = Integer.parseInt(sr.getServiceCode());

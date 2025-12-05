@@ -2,6 +2,7 @@
 Person class authored by Lindsey B
 Responsible for basic "actor" functions and info that Provider, Member, and 
 Manager will all inherit.
+Edited by Wheeler Knight on 12/4/2025 - Removed unused idNumber field, added base returnInfo()
  */
 
 package chocan;
@@ -14,7 +15,7 @@ public class Person {
     protected String city;
     protected String state;
     protected String zipCode;
-    protected String idNumber;
+    // Removed unused idNumber field - Wheeler Knight 12/4/2025
 
     //Add getters setters and constructors
     public Person(String firstName, String lastName, String phoneNumber, String address, String city, String state, String zipCode)
@@ -50,4 +51,9 @@ public class Person {
 
     public String getZipCode(){ return zipCode;}
     public void setZipCode(String zipCode) {this.zipCode = zipCode;}
+    
+    // Written by Wheeler Knight on 12/4/2025 - Base returnInfo method for common fields
+    public String returnBaseInfo() {
+        return firstName + "_" + lastName + "_" + phoneNumber + "_" + address + "_" + city + "_" + state + "_" + zipCode;
+    }
 }

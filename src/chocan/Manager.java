@@ -161,7 +161,8 @@ public class Manager extends Person{
 
 		for (String providerNum : providerToConsults.keySet()) {
 			Provider p = providerMap.get(providerNum);
-			String providerName = (p != null) ? p.getName() : "Unknown";
+			// Edited by Wheeler Knight on 12/4/2025 - Changed to use getFullName()
+			String providerName = (p != null) ? p.getFullName() : "Unknown";
 			int consults = providerToConsults.get(providerNum);
 			double fee = providerToFee.getOrDefault(providerNum, 0.0);
 			System.out.printf("%-20s %-15s %-25d $%-14.2f\n", providerName, providerNum, consults, fee);

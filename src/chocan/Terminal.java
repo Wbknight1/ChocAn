@@ -45,40 +45,69 @@ public class Terminal extends JFrame{
         });
         
         //Login screen set up
+        // Edited by Wheeler Knight on 12/4/2025 - Added labels and improved login screen
         loginScreen = new JPanel();
         loginScreen.setLayout(null);
         
-        JTextField nameField = new JTextField();
-        nameField.setBounds(140, 80, 100, 20);
-        JTextField userNumberField = new JTextField();
-        userNumberField.setBounds(140, 100, 100, 20);
-        JButton loginButton = new JButton("Login");
-        loginButton.setBounds(140, 120, 100, 20);
+        JLabel titleLabel = new JLabel("ChocAn Login");
+        titleLabel.setBounds(140, 30, 150, 30);
+        titleLabel.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 16));
         
+        JLabel nameLabel = new JLabel("Full Name:");
+        nameLabel.setBounds(60, 80, 80, 20);
+        
+        JTextField nameField = new JTextField();
+        nameField.setBounds(140, 80, 150, 20);
+        
+        JLabel numberLabel = new JLabel("User Number:");
+        numberLabel.setBounds(50, 105, 90, 20);
+        
+        JTextField userNumberField = new JTextField();
+        userNumberField.setBounds(140, 105, 150, 20);
+        
+        JButton loginButton = new JButton("Login");
+        loginButton.setBounds(140, 135, 150, 25);
+        
+        // Written by Wheeler Knight on 12/4/2025 - Added input validation
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	String name = nameField.getText().trim();
+            	String number = userNumberField.getText().trim();
             	
-            	switch (verifyLogin(nameField.getText(), userNumberField.getText())) {
+            	// Input validation
+            	if (name.isEmpty()) {
+            		JOptionPane.showMessageDialog(Terminal.this, "Please enter your name", "Validation Error", JOptionPane.WARNING_MESSAGE);
+            		return;
+            	}
+            	if (number.isEmpty()) {
+            		JOptionPane.showMessageDialog(Terminal.this, "Please enter your user number", "Validation Error", JOptionPane.WARNING_MESSAGE);
+            		return;
+            	}
+            	
+            	switch (verifyLogin(name, number)) {
                 case 1:
-                	currMember = getMember(nameField.getText(), userNumberField.getText());
+                	currMember = getMember(name, number);
                 	swapInterface(memberScreen);
                     break;
                 case 2:
-                	currProvider = getProvider(nameField.getText(), userNumberField.getText());
+                	currProvider = getProvider(name, number);
                 	swapInterface(providerScreen);
                     break;
                 case 3:
-                	currManager = getManager(nameField.getText(), userNumberField.getText());
+                	currManager = getManager(name, number);
                 	swapInterface(managerScreen);
                     break;
                 default:
-                	JOptionPane.showMessageDialog(Terminal.this, "Invalid Login", "Warning", JOptionPane.WARNING_MESSAGE);
+                	JOptionPane.showMessageDialog(Terminal.this, "Invalid Login. Please check your name and number.", "Warning", JOptionPane.WARNING_MESSAGE);
             }
             }
         });
        
+        loginScreen.add(titleLabel);
+        loginScreen.add(nameLabel);
         loginScreen.add(nameField);
+        loginScreen.add(numberLabel);
         loginScreen.add(userNumberField);
         loginScreen.add(loginButton);
         
@@ -412,6 +441,28 @@ public class Terminal extends JFrame{
         });
         managerScreen.add(addProviderButton);
         
+        // Written by Wheeler Knight on 12/4/2025 - EFT Data Generation
+        JButton generateEFTButton = new JButton("Generate EFT Data");
+        generateEFTButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                generateEFTData();
+                JOptionPane.showMessageDialog(Terminal.this, "EFT data generated to eft_data.txt", "EFT Generated", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        managerScreen.add(generateEFTButton);
+        
+        // Written by Wheeler Knight on 12/4/2025 - Export Reports to File
+        JButton exportReportsButton = new JButton("Export Reports");
+        exportReportsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                exportReportsToFile();
+                JOptionPane.showMessageDialog(Terminal.this, "Reports exported to reports/ folder", "Reports Exported", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        managerScreen.add(exportReportsButton);
+        
         //Manager screen end
         
         this.add(memberScreen);
@@ -634,6 +685,159 @@ public class Terminal extends JFrame{
 		
 	}
 	
+	// Written by Wheeler Knight on 12/4/2025 - Generate EFT (Electronic Funds Transfer) data for ACME
+	private void generateEFTData() {
+		try {
+			java.io.FileWriter fw = new java.io.FileWriter("eft_data.txt", false);
+			java.io.BufferedWriter bw = new java.io.BufferedWriter(fw);
+			java.io.PrintWriter out = new java.io.PrintWriter(bw);
+			
+			out.println("=== EFT Data Report ===");
+			out.println("Generated: " + java.time.LocalDateTime.now().toString());
+			out.println();
+			
+			// Get service records for the last week
+			java.util.List<ServiceRecord> records = sys.getServiceRecordsForLastWeek();
+			
+			// Aggregate fees by provider
+			java.util.Map<String, Double> providerFees = new java.util.HashMap<>();
+			for (ServiceRecord sr : records) {
+				String providerNum = sr.getProviderNumber();
+				double fee = sr.getServiceFee();
+				providerFees.put(providerNum, providerFees.getOrDefault(providerNum, 0.0) + fee);
+			}
+			
+			// Generate EFT entries
+			out.printf("%-20s %-15s %-15s\n", "Provider Name", "Provider #", "Amount Due");
+			out.println("--------------------------------------------------");
+			
+			double totalAmount = 0.0;
+			for (String providerNum : providerFees.keySet()) {
+				Provider p = sys.getProviderByNumber(providerNum);
+				String providerName = (p != null) ? p.getFullName() : "Unknown";
+				double amount = providerFees.get(providerNum);
+				out.printf("%-20s %-15s $%-14.2f\n", providerName, providerNum, amount);
+				totalAmount += amount;
+			}
+			
+			out.println("--------------------------------------------------");
+			out.printf("Total EFT Amount: $%.2f\n", totalAmount);
+			
+			out.close();
+			System.out.println("EFT data generated to eft_data.txt");
+		} catch (java.io.IOException e) {
+			System.err.println("Error generating EFT data: " + e.getMessage());
+		}
+	}
 	
+	// Written by Wheeler Knight on 12/4/2025 - Export reports to files with timestamp
+	private void exportReportsToFile() {
+		// Create reports directory if it doesn't exist
+		java.io.File reportsDir = new java.io.File("reports");
+		if (!reportsDir.exists()) {
+			reportsDir.mkdir();
+		}
+		
+		String timestamp = java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
+		
+		// Export Member Service Report
+		try {
+			java.io.FileWriter fw = new java.io.FileWriter("reports/member_service_report_" + timestamp + ".txt", false);
+			java.io.BufferedWriter bw = new java.io.BufferedWriter(fw);
+			java.io.PrintWriter out = new java.io.PrintWriter(bw);
+			
+			out.println("=== Member Service Report ===");
+			out.println("Generated: " + java.time.LocalDateTime.now().toString());
+			out.println();
+			
+			java.util.List<ServiceRecord> records = sys.getServiceRecordsForLastWeek();
+			
+			for (Member m : sys.getMembers()) {
+				if (m == null) continue;
+				out.println("Member: " + m.getFullName());
+				out.println("Number: " + m.getCard().getMemberNumber());
+				out.println("Address: " + m.getAddress() + ", " + m.getCity() + ", " + m.getState() + " " + m.getZipCode());
+				out.println("Services:");
+				
+				boolean hasServices = false;
+				for (ServiceRecord sr : records) {
+					if (sr.getMemberNumber().equals(m.getCard().getMemberNumber())) {
+						Provider p = sys.getProviderByNumber(sr.getProviderNumber());
+						String providerName = (p != null) ? p.getFullName() : "Unknown";
+						String serviceName = "Unknown";
+						try {
+							int code = Integer.parseInt(sr.getServiceCode());
+							if (code >= 1 && code <= sys.SERVICE_NAMES.length) {
+								serviceName = sys.SERVICE_NAMES[code - 1];
+							}
+						} catch (Exception ignore) {}
+						out.printf("  %s - %s - %s - $%.2f\n", 
+							sr.getServiceDate(), providerName, serviceName, sr.getServiceFee());
+						hasServices = true;
+					}
+				}
+				if (!hasServices) {
+					out.println("  No services this week");
+				}
+				out.println();
+			}
+			
+			out.close();
+		} catch (java.io.IOException e) {
+			System.err.println("Error exporting member service report: " + e.getMessage());
+		}
+		
+		// Export Summary Report
+		try {
+			java.io.FileWriter fw = new java.io.FileWriter("reports/summary_report_" + timestamp + ".txt", false);
+			java.io.BufferedWriter bw = new java.io.BufferedWriter(fw);
+			java.io.PrintWriter out = new java.io.PrintWriter(bw);
+			
+			out.println("=== Summary Report ===");
+			out.println("Generated: " + java.time.LocalDateTime.now().toString());
+			out.println();
+			
+			java.util.List<ServiceRecord> records = sys.getServiceRecordsForLastWeek();
+			
+			// Aggregate by provider
+			java.util.Map<String, Integer> providerConsults = new java.util.HashMap<>();
+			java.util.Map<String, Double> providerFees = new java.util.HashMap<>();
+			
+			for (ServiceRecord sr : records) {
+				String providerNum = sr.getProviderNumber();
+				providerConsults.put(providerNum, providerConsults.getOrDefault(providerNum, 0) + 1);
+				providerFees.put(providerNum, providerFees.getOrDefault(providerNum, 0.0) + sr.getServiceFee());
+			}
+			
+			out.printf("%-20s %-15s %-15s %-15s\n", "Provider Name", "Number", "Consultations", "Total Fee");
+			out.println("--------------------------------------------------------------");
+			
+			int totalConsults = 0;
+			double totalFees = 0.0;
+			int providersWithService = 0;
+			
+			for (String providerNum : providerConsults.keySet()) {
+				Provider p = sys.getProviderByNumber(providerNum);
+				String providerName = (p != null) ? p.getFullName() : "Unknown";
+				int consults = providerConsults.get(providerNum);
+				double fees = providerFees.get(providerNum);
+				out.printf("%-20s %-15s %-15d $%-14.2f\n", providerName, providerNum, consults, fees);
+				totalConsults += consults;
+				totalFees += fees;
+				providersWithService++;
+			}
+			
+			out.println("--------------------------------------------------------------");
+			out.println("Total providers: " + providersWithService);
+			out.println("Total consultations: " + totalConsults);
+			out.printf("Total fees: $%.2f\n", totalFees);
+			
+			out.close();
+		} catch (java.io.IOException e) {
+			System.err.println("Error exporting summary report: " + e.getMessage());
+		}
+		
+		System.out.println("Reports exported to reports/ folder");
+	}
     
 }

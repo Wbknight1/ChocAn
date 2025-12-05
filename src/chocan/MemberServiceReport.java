@@ -206,7 +206,8 @@ public class MemberServiceReport {
                 if (providerNum != null && allProviders != null) {
                     for (Provider p : allProviders) {
                         if (p != null && providerNum.equals(p.getProviderNumber())) {
-                            providerName = p.getName();
+                            // Edited by Wheeler Knight on 12/4/2025 - Changed to use getFullName()
+                            providerName = p.getFullName();
                             break;
                         }
                     }

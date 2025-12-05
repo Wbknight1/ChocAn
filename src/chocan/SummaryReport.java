@@ -32,7 +32,8 @@ public class SummaryReport {
 
             ProviderSummary summary = providerMap.get(providerNumber);
             if (summary == null) {
-                summary = new ProviderSummary(provider.getName(), providerNumber);
+                // Edited by Wheeler Knight on 12/4/2025 - Changed to use getFullName()
+                summary = new ProviderSummary(provider.getFullName(), providerNumber);
                 providerMap.put(providerNumber, summary);
             }
             summary.consultCount += 1;

@@ -127,10 +127,10 @@
   - Remove inactive users
 
 ### Reporting
-- [ ] **Implement EFT (Electronic Funds Transfer) data generation**
+- [x] **Implement EFT (Electronic Funds Transfer) data generation** ✅
   - Generate payment file for ACME
   
-- [ ] **Add report export to file functionality**
+- [x] **Add report export to file functionality** ✅
   - Save Member Service Reports to files
   - Save Summary Reports to files
   - Include date/timestamp in filename
@@ -153,23 +153,23 @@
   - Rename methods like `RequestHealthService` to `requestHealthService`
   - Rename `BillMembers` to `billMembers`
   
-- [ ] **Remove duplicate code**
-  - Consolidate service fee lookup logic
+- [x] **Remove duplicate code** ✅ (partial)
+  - Consolidate service fee lookup logic (done - getServiceFeeByCode)
   - Move `returnInfo()` to Person base class
-  - Remove `Provider.getName()` (use inherited `getFullName()`)
+  - Remove `Provider.getName()` (use inherited `getFullName()`) ✅
 
 ### UI Improvements
 - [ ] **Use proper layout managers** (Terminal.java)
   - Replace `setLayout(null)` with BorderLayout/GridBagLayout
   - Make UI responsive to window resizing
   
-- [ ] **Add input validation**
+- [x] **Add input validation** ✅ (partial - login validation added)
   - Validate member/provider numbers (format, length)
   - Validate email format
   - Validate phone number format
   - Validate zip code format
   
-- [ ] **Improve login screen**
+- [x] **Improve login screen** ✅
   - Add labels for name and number fields
   - Add "Forgot Password" functionality
   - Show login errors more clearly
