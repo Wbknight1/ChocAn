@@ -199,7 +199,7 @@
   - Auto-logout after period of inactivity
 
 ### Testing
-- [ ] **Create unit tests**
+- [x] **Create unit tests** ✅
   - Test DataCenter CRUD operations
   - Test validation methods
   - Test report generation
