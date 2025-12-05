@@ -75,5 +75,16 @@
     "city": "Auburn",
     "state": "Alabama",
     "zipCode": "36830"
+  },
+  {
+    "providerNumber": "P999",
+    "password": "newprovider",
+    "firstName": "John",
+    "lastName": "Smith",
+    "phoneNumber": "555-999-8888",
+    "address": "500 Medical Plaza",
+    "city": "Birmingham",
+    "state": "AL",
+    "zipCode": "35203"
   }
 ]

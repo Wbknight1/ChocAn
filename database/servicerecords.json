@@ -138,5 +138,19 @@
     "serviceCode": "2",
     "serviceFee": 8.99,
     "serviceDate": "2025-12-05"
+  },
+  {
+    "providerNumber": "P005",
+    "memberNumber": "567252",
+    "serviceCode": "2",
+    "serviceFee": 8.99,
+    "serviceDate": "2025-12-05"
+  },
+  {
+    "providerNumber": "P001",
+    "memberNumber": "100001",
+    "serviceCode": "3",
+    "serviceFee": 29.99,
+    "serviceDate": "2025-12-05"
   }
 ]

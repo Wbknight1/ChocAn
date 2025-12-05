@@ -80,22 +80,6 @@
     "zipCode": "36104"
   },
   {
-    "email": "mike.brown@outlook.com",
-    "pin": "1111",
-    "memberCard": {
-      "memberFirstName": "Mike",
-      "memberLastName": "Brown",
-      "memberNumber": "100005"
-    },
-    "firstName": "Mike",
-    "lastName": "Brown",
-    "phoneNumber": "(334)-777-8888",
-    "address": "555 Maple Lane",
-    "city": "Mobile",
-    "state": "Alabama",
-    "zipCode": "36602"
-  },
-  {
     "email": "emily.davis@gmail.com",
     "pin": "2222",
     "memberCard": {
@@ -174,5 +158,36 @@
     "city": "Birmingham",
     "state": "Alabama",
     "zipCode": "35205"
+  },
+  {
+    "email": "jane.new@email.com",
+    "memberCard": {
+      "memberFirstName": "John",
+      "memberLastName": "Newmember",
+      "memberNumber": "200001"
+    },
+    "firstName": "John",
+    "lastName": "Newmember",
+    "phoneNumber": "555-123-4567",
+    "address": "123 Test Street",
+    "city": "Tuscaloosa",
+    "state": "AL",
+    "zipCode": "35401"
+  },
+  {
+    "email": "mike.brown@outlook.com",
+    "pin": "1111",
+    "memberCard": {
+      "memberFirstName": "Mike",
+      "memberLastName": "Brown",
+      "memberNumber": "100005"
+    },
+    "firstName": "Mike",
+    "lastName": "Brown",
+    "phoneNumber": "(334)-777-8888",
+    "address": "555 Maple Lane",
+    "city": "Mobile",
+    "state": "Alabama",
+    "zipCode": "36602"
   }
 ]
