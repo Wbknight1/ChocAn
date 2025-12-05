@@ -16,7 +16,18 @@ public class Member extends Person {
     public MemberCard getCard() {return memberCard;}
     
     public String returnInfo() {
-    	return firstName + "_" + lastName + "_" + phoneNumber  + "_" + address  + "_" + city + "_" +  state  + "_" + zipCode  + "_" + email + "_" + memberCard.getMemberNumber();
+        return firstName + "_" + lastName + "_" + phoneNumber + "_" + address + "_" + city + "_" + state + "_" + zipCode
+                + "_" + email + "_" + memberCard.getMemberNumber();
+    }
+    
+    public MemberCard GetCard() {
+        return memberCard;
+    }
+
+    public void RequestHealthService() {
+        /*
+        The member requests a health service from a provider and service of their choosing */
+
     }
 
 }

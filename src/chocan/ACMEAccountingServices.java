@@ -36,7 +36,24 @@ public class ACMEAccountingServices{
     }
     
     public void unsuspendMember(String number) {
-    	
+
     }
+    
+    // Written by Wheeler Knight 12/04/2025
+    public void AddMembers(Member member) {
+
+    };
+
+    // Written by Wheeler Knight 12/04/2025
+    public void ToggleValidation() {
+        
+    };
+
+    // Written by Wheeler Knight 12/04/2025
+    public void BillMembers() {
+        /*
+        This should bill the members for their services.
+        */
+    };
  
 }

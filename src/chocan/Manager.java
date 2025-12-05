@@ -14,10 +14,25 @@ public class Manager extends Person{
 	}
 	
 	public String returnInfo() {
-    	return firstName + "_" + lastName + "_" + phoneNumber  + "_" + address  + "_" + city + "_" +  state  + "_" + zipCode;
-    }
-
-
+		return firstName + "_" + lastName + "_" + phoneNumber + "_" + address + "_" + city + "_" + state + "_" + zipCode;
+	}
 		
+	// Written by Wheeler Knight 12/04/2025
+	public void RequestServiceReport(ACMEAccountingServices accounting) {
+		/*
+		This should prompt the manager to enter the week number and year for the report.
+		It should then generate and print the report.
+		*/
+	};
+
+	// Written by Wheeler Knight 12/04/2025
+	public void RequestSummaryReport(ACMEAccountingServices accounting) {
+		/*
+		This should generate and print the summary report.
+		*/
+	};
+
+
+
 
 }
