@@ -1,3 +1,9 @@
+// Terminal Class
+/*
+This class implements the running terminal functions. It houses the swing gui and 
+is responsible for verifying login and various 
+ */
+
 package chocan;
 
 import java.awt.event.ActionEvent;
@@ -240,8 +246,20 @@ public class Terminal extends JFrame{
 	 * return 0 if the login is NOT valid
 	*/
 	private int verifyLogin(String name, String number) {
+		if (sys.validMember(name, number))
+        {
+            return 1;
+        }
+        if (sys.validProvider(name, number))
+        {
+            return 2;
+        }
+        if (sys.validManager(name, number))
+        {
+            return 3;
+        }
 		
-		return 2;
+        return 0;
 	}
 	
 	/* 
@@ -250,8 +268,21 @@ public class Terminal extends JFrame{
 	*/
 	
 	private Member getMember(String name, String number) {
-		
-		return null;
+		Member[] members = sys.getMembers();
+        if (members == null) {return null;}
+        for (Member m : members)
+        {
+            if (m == null)
+            {
+                continue;
+            }
+            String fullName = m.getFullName(); // full name of each member as loop continues
+            if (fullName.equals(name) && m.getCard().getMemberNumber().equals(number)) // if match
+            {
+                return m;
+            }
+        }
+        return null;
 	}
 	
 	/* 
@@ -261,6 +292,24 @@ public class Terminal extends JFrame{
 	
 	private Provider getProvider(String name, String number) {
 		
+        Provider[] providers = sys.getProviders();
+        if (providers == null)
+        {
+            return null;
+        }
+        
+        for (Provider p : providers)
+        {
+            if (p == null)
+            {
+                continue;
+            }
+            String fullName = p.getFullName();
+            if (fullName.equals(name) && p.getProviderNumber().equals(number))
+            {
+                return p;
+            }
+        }
 		return null;
 	}
 	
@@ -271,6 +320,18 @@ public class Terminal extends JFrame{
 
 	private Manager getManager(String name, String number) {
 	
+        Manager[] manager = sys.getManagers();
+        if (manager == null)
+        {
+            return null;
+        }
+        for (Manager mgr : manager)
+        {
+            if (mgr.getFullName().equals(name) && mgr.getManagerNumber().equals(number))
+            {
+                return mgr;
+            }
+        }
 		return null;
 	
 	}
@@ -288,9 +349,20 @@ public class Terminal extends JFrame{
 	 */
 	
 	private int fetchServiceReportCount(Member member) {
-		int count = 0;
-		
-		return count;
+		int memberCount = 0;
+		String membName = member.getFullName();
+        ProviderForm[] forms = sys.getWeeklyProviderForm();
+
+        for (ProviderForm form : forms)
+        {
+            if (form == null) 
+            {continue;}
+            if (membName.equals(form.getMemberName()))
+            {
+                memberCount++;
+            }
+        }
+		return memberCount;
 	}
 	
 	/*
@@ -302,6 +374,21 @@ public class Terminal extends JFrame{
 	private int fetchServiceRequestCount(Provider provider) {
 		int count = 0;
 		
+        ServiceRequest[] pendingRequest = sys.getPendingServiceRequest();
+        if (pendingRequest == null) return 0;
+
+        String providerName = provider.getFullName();
+        for(ServiceRequest request : pendingRequest)
+        {
+            if (request == null)
+            {
+                continue;
+            }
+            if (providerName.equals(request.providerName))
+            {
+                count++;
+            }
+        }
 		return count;
 	}
 	
@@ -313,9 +400,22 @@ public class Terminal extends JFrame{
 	 */
 	
 	private String accumulateFees(Member member) {
-		String returnString = "";
 		
-		return returnString;
+        ProviderForm[] forms = sys.getWeeklyProviderForm();
+        if (forms == null) return null; // FIXME?
+        String memberName = member.getFullName();
+        StringBuilder returnString = new StringBuilder();
+        for (ProviderForm form : forms)
+        {
+            if (form == null) {continue;}
+            if (memberName.equals(form.getMemberName())) // add fee number to string every time member name is found
+            {
+                // variable double fee is converted into string text for purpose of adding to a string list
+                returnString.append(String.valueOf(form.getFee())).append("\n"); 
+            }
+        }
+
+		return returnString.toString();
 		
 	}
 	
@@ -327,9 +427,22 @@ public class Terminal extends JFrame{
 	 */
 	
 	private String accumulateRequest(Provider provider) {
-		String returnString = "";
+		//String returnString = "";
+
+        ServiceRequest[] pendingRequests = sys.getPendingServiceRequest();
+        if (pendingRequests == null) return null; //FIXME?
+        String providerName = provider.getFullName();
+        StringBuilder returnString = new StringBuilder(); // use of built in StringBuilder function
+
+        for(ServiceRequest request : pendingRequests)
+        {
+            if (providerName.equals(request.providerName))
+            {
+                returnString.append(request.getInfo()).append('\n');
+            }
+        }
 		
-		return returnString;
+		return returnString.toString();
 		
 	}
 	

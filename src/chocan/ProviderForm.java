@@ -1,3 +1,9 @@
+// Class ProviderForm
+// This class is responsible for the form that 
+//is filled out when a service is provided.
+// It should detail the who for, who by, and what was provided
+// INCOMPLETE
+
 package chocan;
 
 public class ProviderForm {
@@ -11,8 +17,49 @@ public class ProviderForm {
     private short year;
     private double fee;
 
+    private String memberName;
+    private String memberNumber;
+
+    private String providerName;
+    private String providerNumber;
+
+    private String serviceCode;
+    private String serviceName;
+
+    private String comments;
+
+    // Constructor
+    public ProviderForm(byte hours, byte minutes, byte seconds, byte day, byte month, short year, String providerName, String providerNumber, String memberName, String memberNumber, String serviceCode, String serviceName, double fee, String comments)
+    {
+        this.hours = hours;
+        this.minutes = minutes;
+        this.seconds = seconds;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.providerName = providerName;
+        this.providerNumber = providerNumber;
+        this.memberName = memberName;
+        this.memberNumber = memberNumber;
+        this.serviceCode = serviceCode;
+        this.serviceName = serviceName;
+        this.fee = fee;
+        this.comments = comments;
+    }
+
     //GetHours() etc
+    // TODO: Finish all getters and setters
     public String getInfo() {
     	return name + "|" + number + "|" + hours + "|" + minutes + "|" + seconds + "|" + day + "|" + month + "|" + year  + "|" + fee;
+    }
+    
+    public String getMemberName()
+    {
+        return memberName;
+    }
+
+    public double getFee()
+    {
+        return fee;
     }
 }

@@ -1,3 +1,8 @@
+/*
+Member Class
+Responsible for being able to return membercard info relevant to a particular member
+ */
+
 package chocan;
 
 public class MemberCard {

@@ -1,3 +1,9 @@
+/*
+Person class authored by Lindsey B
+Responsible for basic "actor" functions and info that Provider, Member, and 
+Manager will all inherit.
+ */
+
 package chocan;
 
 public class Person {
@@ -8,6 +14,7 @@ public class Person {
     protected String city;
     protected String state;
     protected String zipCode;
+    protected String idNumber;
 
     //Add getters setters and constructors
     public Person(String firstName, String lastName, String phoneNumber, String address, String city, String state, String zipCode)
@@ -26,6 +33,8 @@ public class Person {
 
     public String getLastName(){ return lastName;}
     public void setLastName(String lastName) {this.lastName = lastName;}
+
+    public String getFullName() {return firstName + " " + lastName;}
 
     public String getPhoneNumber(){ return phoneNumber;}
     public void setNumber(String number) {this.phoneNumber = number;}
