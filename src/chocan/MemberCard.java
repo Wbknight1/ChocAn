@@ -1,6 +1,7 @@
 /*
 Member Class
 Responsible for being able to return membercard info relevant to a particular member
+WRitten by Dylan Stokes 12/05/2025
  */
 
 package chocan;

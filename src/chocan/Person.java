@@ -1,5 +1,5 @@
 /*
-Person class authored by Lindsey B
+Person class authored by Lindsey Bowen 12/05/2025
 Responsible for basic "actor" functions and info that Provider, Member, and 
 Manager will all inherit.
  */

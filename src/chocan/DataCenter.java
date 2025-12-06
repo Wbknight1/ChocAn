@@ -2,6 +2,8 @@ package chocan;
 
 import java.util.*;
 
+/* Written by Rossy Hollinger 12/05/2025 */
+
 public class DataCenter extends readAndWritable{
 	public final String[] SERVICE_NAMES = {"CONSULTATION", "CONVERSATION", "EMERGENCY"};
 	public final Double[] SERVICE_FEE_RATES = {12.99, 8.99, 29.99};

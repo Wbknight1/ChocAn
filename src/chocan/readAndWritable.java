@@ -1,5 +1,7 @@
 package chocan;
 
+/* Written by Esmeralda Gomez 12/05/2025 */
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -12,10 +14,6 @@ import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.Vector;
 
-/**
- * Refactored by Wheeler Knight on 12/5/2025 - Switched from text files to JSON using Gson.
- * Refactored by Wheeler Knight on 12/5/2025 - Moved data storage to database/ folder.
- */
 public abstract class readAndWritable {
     
     protected static final String DATABASE_PATH = "database/";
@@ -67,7 +65,7 @@ public abstract class readAndWritable {
             System.out.println("Data saved to: " + path);
         } catch (IOException e) {
             System.err.println("Error writing JSON to file: " + e.getMessage());
-            e.printStackTrace();
+            e.printStackTrace(); // AI Agent assisted in generating this code
         }
     }
     
@@ -103,7 +101,7 @@ public abstract class readAndWritable {
         return result != null ? result : new Vector<>();
     }
     
-    // Written by Wheeler Knight on 12/5/2025 - Added Operator persistence
+    // Written by Wheeler Knight on 12/5/2025 - 
     protected Vector<Operator> readOperators(String fileName) {
         Type type = new TypeToken<Vector<Operator>>(){}.getType();
         Vector<Operator> result = readFromJsonFile(DATABASE_PATH + fileName, type);

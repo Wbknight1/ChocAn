@@ -1,6 +1,7 @@
 package chocan;
 
-// Edited by Wheeler Knight 12/04/2025
+/* Written By Rossy Hollinger 12/05/2025 */
+
 import java.util.List;
 
 public class Provider extends Person {
@@ -12,7 +13,7 @@ public class Provider extends Person {
         super();
     }
     
-        // Below is Written by Wheeler Knight 12/04/2025
+        // Written by Wheeler Knight 12/04/2025
         public String getProviderNumber()
         {
             return providerNumber;

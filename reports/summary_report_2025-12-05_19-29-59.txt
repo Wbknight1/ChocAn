@@ -1,0 +1,16 @@
+=== Summary Report ===
+Generated: 2025-12-05T19:29:59.629905089
+
+Provider             Number          Consultations   Total Fee      
+--------------------------------------------------------------
+Dr Davis             P005            3               $51.97         
+Dr Brown             P004            3               $30.97         
+Dr Miller            P006            1               $8.99          
+Dr Smith             P001            7               $137.93        
+Dr Williams          P003            4               $64.96         
+Dr Johnson           P002            4               $64.96         
+Rossy Hollinger      8008            2               $42.98         
+--------------------------------------------------------------
+Total providers: 7
+Total consultations: 24
+Total fees: $402.76

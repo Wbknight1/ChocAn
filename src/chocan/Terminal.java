@@ -1,8 +1,10 @@
 // Terminal Class
 /*
-This class implements the running terminal functions. It houses the swing gui and 
-is responsible for verifying login and various operations.
-Rewritten by Wheeler Knight on 12/5/2025 - Added all missing features per requirements
+This class implements the running terminal functions. It houses the swing gui
+
+WRITER NOTE: 
+The majority of this class (~800 lines) was written by Logan Hernandez.
+Wheeler Knight prototyped Logan's initial GUI through AI assistance for testing purposes, and the conflicts were merged between the two.
  */
 
 package chocan;

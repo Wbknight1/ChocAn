@@ -1,5 +1,6 @@
 package chocan;
 
+/* Written by Rossy hollinger */
 public class Manager extends Person {
 	
 	private String managerNumber;

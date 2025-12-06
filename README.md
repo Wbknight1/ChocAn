@@ -2,6 +2,7 @@
 
 
 
+
 # AI DISCLOSURE:
 Artifical Intelligence was utilized to complete portions of this application. The AI service used was Cursor IDE, and it was used in contexts such as building test cases, refactoring, commenting, documentation, syntax errors and suggestions, logic errors, environment errors, and prototyping.
 
@@ -69,4 +70,10 @@ The following is a reference for all known cases of AI-edited or generated sourc
 |  `Line 17` | AI Agent assisten in generating service codes |
 | `Line 22` | Helped to format and write out to the file after the sort in displayProviderDirectory() |
 | `lines 33-36` | wrote boilerplate code for writing to an external file |
-| 
+
+**readAndWritable.java**
+| Line/Snippet | Description |
+|-------|-------------|
+| `Lines 139-` | The Private Static Class Local Date Adapter extends type adapter and overrides read and write to JSON for the date, which is not native to GSON. I used this because the date would not output and I prompted Cursor to assist with that |
+
+Other AI references to smaller inline edits are within some of the files under the name of the user. 

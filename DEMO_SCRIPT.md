@@ -14,6 +14,10 @@ cd /home/wheeler/cs200/project4/ChocAn
 ./run_app.sh        # Launch the GUI
 ```
 
+```bash
+java -cp bin:lib/gson-2.10.1.jar chocan.Main
+```
+
 ### 2. Verify Database Files Exist
 ```
 database/

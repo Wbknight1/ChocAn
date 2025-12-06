@@ -1,5 +1,5 @@
 /*
-Member class authored by Lindsey B.
+Member class authored by Lindsey Bowen 12/05/2025
 Inherits from Person and stores all information relevant to a "Member"
 Not really responsible for much besides being an object with member info
 Contains class MemberCard which stores the name and ID of a member

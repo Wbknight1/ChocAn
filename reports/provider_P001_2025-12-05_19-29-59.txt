@@ -1,0 +1,24 @@
+=========================================
+       PROVIDER SERVICE REPORT          
+=========================================
+Generated: 2025-12-05T19:29:59.634398655
+
+Provider Name   : Dr Smith
+Provider Number : P001
+Address         : 123 Medical Dr
+City            : Birmingham
+State           : Alabama
+ZIP Code        : 35201
+
+Date          Member Name           Member #         Service               Fee       
+----------------------------------------------------------------------------------
+2025-12-01    Jon Doe               100001           CONSULTATION          $12.99    
+2025-12-01    Jane Doe              100002           CONVERSATION          $8.99     
+2025-12-04    Wyatt Knight          567252           EMERGENCY             $29.99    
+2025-12-05    Bob Wilson            100003           CONSULTATION          $12.99    
+2025-12-05    Jon Doe               100001           EMERGENCY             $29.99    
+2025-12-05    Jon Doe               100001           EMERGENCY             $29.99    
+2025-12-05    Jon Doe               100001           CONSULTATION          $12.99    
+----------------------------------------------------------------------------------
+Total Consultations: 7
+Total Fee to be Paid: $137.93
