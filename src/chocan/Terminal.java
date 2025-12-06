@@ -234,8 +234,20 @@ public class Terminal extends JFrame {
         	}
         });
         
+        JButton printSummaryButton = new JButton("Print Summary Report");
+        printSummaryButton.setBounds(100, 250, 280, 35);
+        printSummaryButton.addActionListener(e -> {
+        	SummaryReport.printSummaryReport(sys);
+        	JOptionPane.showMessageDialog(this, "Summary Report printed to console.", 
+        		"Report", JOptionPane.INFORMATION_MESSAGE);
+        });
+        
+        JButton printMemberReportButton = new JButton("Print Member Service Report");
+        printMemberReportButton.setBounds(100, 295, 280, 35);
+        printMemberReportButton.addActionListener(e -> showMemberReportDialog());
+        
         JButton logoutButton = new JButton("Logout");
-        logoutButton.setBounds(100, 280, 280, 35);
+        logoutButton.setBounds(100, 360, 280, 35);
         logoutButton.addActionListener(e -> {
         	currProvider = null;
         	swapInterface(loginScreen);
@@ -246,6 +258,8 @@ public class Terminal extends JFrame {
         providerScreen.add(addServiceRecordButton);
         providerScreen.add(viewDirectoryButton);
         providerScreen.add(viewMyReportButton);
+        providerScreen.add(printSummaryButton);
+        providerScreen.add(printMemberReportButton);
         providerScreen.add(logoutButton);
 	}
 	
@@ -952,6 +966,35 @@ public class Terminal extends JFrame {
 			}
 		}
 		JOptionPane.showMessageDialog(this, sb.toString(), "Suspended Members", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	private void showMemberReportDialog() {
+		Member[] members = sys.getMembers();
+		if (members.length == 0) {
+			JOptionPane.showMessageDialog(this, "No members in system.", "Info", JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		
+		String[] memberOptions = new String[members.length];
+		for (int i = 0; i < members.length; i++) {
+			memberOptions[i] = members[i].getFullName() + " (#" + members[i].getCard().getMemberNumber() + ")";
+		}
+		
+		JComboBox<String> memberBox = new JComboBox<>(memberOptions);
+		
+		Object[] fields = {
+			"Select Member:", memberBox
+		};
+		
+		int result = JOptionPane.showConfirmDialog(this, fields, "Print Member Service Report", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) {
+			int selectedIndex = memberBox.getSelectedIndex();
+			Member selectedMember = members[selectedIndex];
+			java.util.List<ServiceRecord> weeklyRecords = sys.getServiceRecordsForLastWeek();
+			MemberServiceReport.printMemberReport(selectedMember, weeklyRecords, sys);
+			JOptionPane.showMessageDialog(this, "Member Service Report printed to console.", 
+				"Report", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 	
 	// ==================== MAIN ACCOUNTING PROCEDURE ====================

@@ -1,1 +1,0 @@
-- [] Dockerize the application so you can ship, compile, and run it on different systems and environments

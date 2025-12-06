@@ -183,18 +183,40 @@ public class Provider extends Person {
     	}
     }
 
-    public ProviderDirectory requestProviderDirectory() {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     public ServiceRecord requestServiceRecord(String providerNumber, String startDate, String endDate) {
-        // TODO Auto-generated method stub
+        DataCenter dataCenter = new DataCenter();
+
+        java.util.List<ServiceRecord> lastWeekRecords = dataCenter.getServiceRecordsForLastWeek();
+
+        if (lastWeekRecords == null || lastWeekRecords.isEmpty()) {
+            System.out.println("No service records found for the last week.");
+            return null;
+        }
+
+        System.out.println("Member Service Record(s) for last week:");
+        for (ServiceRecord record : lastWeekRecords) {
+            if (providerNumber == null || providerNumber.isEmpty() || providerNumber.equals(record.getProviderNumber())) {
+                System.out.println("Provider Number: " + record.getProviderNumber()
+                    + ", Member Number: " + record.getMemberNumber()
+                    + ", Service Code: " + record.getServiceCode()
+                    + ", Service Fee: $" + record.getServiceFee()
+                    + ", Service Date: " + record.getServiceDate());
+            }
+        }
+
+        for (ServiceRecord record : lastWeekRecords) {
+            if (providerNumber == null || providerNumber.isEmpty() || providerNumber.equals(record.getProviderNumber())) {
+                return record;
+            }
+        }
         return null;
+    
     }
 
     public SummaryReport requestSummaryReport(String startDate, String endDate) {
-        // TODO Auto-generated method stub
+        DataCenter dataCenter = new DataCenter();
+        SummaryReport.printSummaryReport(dataCenter);
         return null;
     }
 
