@@ -13,15 +13,14 @@ import java.time.LocalDate;
 import java.util.Vector;
 
 /**
- * Abstract class for JSON-based data persistence using Gson.
  * Refactored by Wheeler Knight on 12/5/2025 - Switched from text files to JSON using Gson.
  * Refactored by Wheeler Knight on 12/5/2025 - Moved data storage to database/ folder.
  */
 public abstract class readAndWritable {
     
-    // Database folder path - all JSON files stored here
     protected static final String DATABASE_PATH = "database/";
     
+    // AI Agent assisted in generating this code
     // Gson instance with pretty printing and LocalDate support
     protected static final Gson gson = new GsonBuilder()
             .setPrettyPrinting()
@@ -75,13 +74,13 @@ public abstract class readAndWritable {
     // ==================== READ METHODS ====================
     
     protected Vector<Member> readMembers(String fileName) {
-        Type type = new TypeToken<Vector<Member>>(){}.getType();
+        Type type = new TypeToken<Vector<Member>>(){}.getType(); // AI Agent assisted in generating this code
         Vector<Member> result = readFromJsonFile(DATABASE_PATH + fileName, type);
         return result != null ? result : new Vector<>();
     }
     
     protected Vector<Provider> readProviders(String fileName) {
-        Type type = new TypeToken<Vector<Provider>>(){}.getType();
+        Type type = new TypeToken<Vector<Provider>>(){}.getType(); // AI Agent assisted in generating this code
         Vector<Provider> result = readFromJsonFile(DATABASE_PATH + fileName, type);
         return result != null ? result : new Vector<>();
     }
@@ -113,6 +112,8 @@ public abstract class readAndWritable {
     
     /**
      * Read JSON from a file path
+     * Written by Wheeler Knight on 12/5/2025
+     * AI Agent assisted in generating this code
      */
     protected <T> T readFromJsonFile(String path, Type type) {
         File file = new File(path);

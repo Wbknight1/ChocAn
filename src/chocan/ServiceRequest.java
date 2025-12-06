@@ -5,7 +5,6 @@ public class ServiceRequest {
     String providerName;
     String serviceType;
 
-    // Default constructor for Gson deserialization - Wheeler Knight 12/5/2025
     public ServiceRequest() {}
     
     public ServiceRequest(Member member, String providerName, String serviceType) {
