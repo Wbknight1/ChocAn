@@ -1,6 +1,120 @@
 # ChocAn System
 
+A healthcare services management system for Chocoholics Anonymous (ChocAn), built with Java Swing.
 
+## Group 11
+- Wheeler Knight
+- Rossy Hollinger
+- Logan Hernandez
+- Lindsey Bowen
+- Dylan Stokes
+- Esmeralda Gomez
+
+## Contributions
+
+| Class | Author |
+|-------|--------|
+| `Main.java` | Group |
+| `Terminal.java` | Logan Hernandez |
+| `DataCenter.java` | Rossy Hollinger |
+| `Person.java` | Lindsey Bowen |
+| `Member.java` | Lindsey Bowen |
+| `Provider.java` | Rossy Hollinger |
+| `Manager.java` | Rossy Hollinger |
+| `Operator.java` | Wheeler Knight |
+| `MemberCard.java` | Dylan Stokes |
+| `ServiceRecord.java` | Dylan Stokes |
+| `ServiceRequest.java` | Esmeralda Gomez |
+| `ProviderForm.java` | Esmeralda Gomez |
+| `ProviderDirectory.java` | Dylan Stokes |
+| `ProviderReport.java` | Wheeler Knight |
+| `MemberServiceReport.java` | Wheeler Knight |
+| `SummaryReport.java` | Lindsey Bowen |
+| `readAndWritable.java` | Esmeralda Gomez |
+| `ACMEAccountingServices.java` | Logan Hernandez |
+
+## Features
+
+- **Member Portal**: Request health services, view service history
+- **Provider Portal**: Approve service requests, bill ChocAn, view provider directory, generate reports
+- **Manager Portal**: Generate summary/member/provider reports, view all users, add members/providers, generate EFT data
+- **Operator Portal**: Full CRUD operations for members and providers, suspend/unsuspend members
+
+## Prerequisites
+
+- Java JDK 11 or higher
+- GSON library (included in `lib/gson-2.10.1.jar`)
+
+## **NOTE**: Refer to the `BUILD.md` documentation for further instructions on running/building ChocAn on different systems
+
+## Building
+
+Compile all source files:
+
+```bash
+javac -cp lib/gson-2.10.1.jar -d bin src/chocan/*.java
+```
+
+## Running
+
+### Linux/macOS
+```bash
+java -cp bin:lib/gson-2.10.1.jar chocan.Main
+```
+
+### Windows
+```cmd
+java -cp "bin;lib\gson-2.10.1.jar" chocan.Main
+```
+
+### WSL Users
+If running in WSL, you need an X11 display server. On Windows 11 with WSLg:
+```bash
+export DISPLAY=:0
+java -cp bin:lib/gson-2.10.1.jar chocan.Main
+```
+
+## Test Logins
+
+| Role | Name | Number | PIN/Password |
+|------|------|--------|--------------|
+| Member | Jon Doe | 100001 | 1234 |
+| Provider | Dr Smith | P001 | provider |
+| Manager | Admin Manager | M001 | admin |
+| Operator | System Operator | OP001 | operator |
+
+## Project Structure
+
+```
+ChocAn/
+├── src/chocan/          # Source code
+├── bin/                 # Compiled classes
+├── lib/                 # Dependencies (GSON)
+├── database/            # JSON data files
+├── reports/             # Generated reports
+├── provider_directory.txt
+└── eft_data.txt
+```
+
+## Data Files
+
+All data is stored in JSON format in the `/database` folder:
+- `members.json` - Active member records
+- `suspendedmembers.json` - Suspended member records
+- `providers.json` - Provider records
+- `managers.json` - Manager records
+- `operators.json` - Operator records
+- `servicerecords.json` - Completed service records
+
+## Service Codes
+
+| Code | Service | Fee |
+|------|---------|-----|
+| 1 | CONSULTATION | $12.99 |
+| 2 | CONVERSATION | $8.99 |
+| 3 | EMERGENCY | $29.99 |
+
+---
 
 
 # AI DISCLOSURE:
@@ -76,4 +190,11 @@ The following is a reference for all known cases of AI-edited or generated sourc
 |-------|-------------|
 | `Lines 139-` | The Private Static Class Local Date Adapter extends type adapter and overrides read and write to JSON for the date, which is not native to GSON. I used this because the date would not output and I prompted Cursor to assist with that |
 
+
+**Terminal.md**:
+- As disclosed, Wheeler K. generated a portion of the terminal code as a prototype through Cursor agent and merged successful integrations with the main codebase.
+- Logan Hernandez wrote the majority of the foundation of the class manually.
+
 Other AI references to smaller inline edits are within some of the files under the name of the user. 
+
+**IP Disclosure**: All AI-Generated Code was reviewed for accuracy and checked for plagarism
