@@ -2,7 +2,6 @@
 // This class is responsible for the form that 
 //is filled out when a service is provided.
 // It should detail the who for, who by, and what was provided
-// INCOMPLETE
 
 package chocan;
 

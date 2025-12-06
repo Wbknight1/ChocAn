@@ -1,9 +1,5 @@
 package chocan;
 
-/* TODO:
-- make sure that it loads in service data from the data center
-- reformat the output for the cli and ui correctly
-*/
 
 public class ProviderDirectory {
 
@@ -12,13 +8,10 @@ public class ProviderDirectory {
     private String[] serviceCodes;
     private int serviceCount;
 
-    // Optionally, you can make a Service inner class, but here we use parallel arrays for simplicity and alignment with DataCenter data
 
     public ProviderDirectory(DataCenter dataCenter) {
-        // Assume that the number of services is the length of SERVICE_NAMES in DataCenter
         this.serviceNames = dataCenter.SERVICE_NAMES;
         this.serviceFees = dataCenter.SERVICE_FEE_RATES;
-        // Generate service codes as 6-digit zero-padded numbers (e.g., "000001", "000002", etc.)
         this.serviceCount = serviceNames.length;
         this.serviceCodes = new String[serviceCount];
         for (int i = 0; i < serviceCount; i++) {
@@ -29,7 +22,6 @@ public class ProviderDirectory {
     public void displayProviderDirectory() {
         System.out.println("Provider Directory:");
         System.out.printf("%-20s %-10s %-10s\n", "Service Name", "Code", "Fee ($)");
-        // Sort and display alphabetically by serviceName
         int[] orderedIndices = getAlphabeticalOrderIndices();
         for (int i = 0; i < serviceCount; i++) {
             int idx = orderedIndices[i];
@@ -65,12 +57,5 @@ public class ProviderDirectory {
         }
         return out;
     }
-
-    // If a provider requests the directory, you can call:
-    // directory.displayProviderDirectory();
-    // and/or
-    // directory.saveProviderDirectoryToFile("src/chocan/provider_directory.txt");
-
-
     
 }

@@ -12,13 +12,13 @@ public class DataCenter extends readAndWritable{
     private Vector<Manager> managers = new Vector<>();
     private Vector<Operator> operators = new Vector<>();
 
-    // Edited by Wheeler Knight on 12/4/2025 - Initialized Vector fields to prevent NullPointerException
+    // Edited by Wheeler Knight on 12/4/2025 - Initialized vector fields to prevent null pointer
     private Vector<ProviderForm> weeklyProviderForms = new Vector<>();
     private Vector<MemberServiceReport> allMemberServiceReports = new Vector<>();
     private Vector<ServiceRequest> pendingServiceRequest = new Vector<>();
     private Vector<ServiceRecord> serviceRecords = new Vector<>();
     
-    // Edited by Wheeler Knight on 12/5/2025 - Switched to JSON file format using Gson
+    // Edited by Wheeler Knight on 12/5/2025 - Switched to JSON file format using GSON
     // Edited by Wheeler Knight on 12/5/2025 - Added Operator support
     public DataCenter() {
     	Vector<Member> m = readMembers("members.json");
@@ -112,8 +112,8 @@ public class DataCenter extends readAndWritable{
     	return pendingServiceRequest.toArray(new ServiceRequest[pendingServiceRequest.size()]);
     }
     
-    // ==================== MEMBER CRUD ====================
-    
+    // ==================== MEMBER CRUD OPERATIONS====================
+    // Edited by Wheeler Knight on 12/5/2025
     public void addMember(String firstName, String lastName, String phoneNumber, String address, 
                          String city, String state, String zipCode, String email, String number) {
     	members.add(new Member(firstName, lastName, phoneNumber, address, city, state, zipCode, email, number));
@@ -126,7 +126,6 @@ public class DataCenter extends readAndWritable{
         for (int i = 0; i < members.size(); i++) {
             Member m = members.get(i);
             if (m.getCard().getMemberNumber().equals(memberNumber)) {
-                // Create new member with updated info (keeping same number)
                 members.set(i, new Member(firstName, lastName, phoneNumber, address, city, state, zipCode, email, memberNumber));
                 System.out.println("Member updated: " + firstName + " " + lastName);
                 return true;
@@ -177,7 +176,8 @@ public class DataCenter extends readAndWritable{
         return false;
     }
     
-    // ==================== PROVIDER CRUD ====================
+    // ==================== PROVIDER CRUD OPERATIONS====================
+    // Edited by Wheeler Knight on 12/5/2025
     
     public void addProvider(String firstName, String lastName, String phoneNumber, String address, 
                            String city, String state, String zipCode, String number) {
@@ -213,7 +213,7 @@ public class DataCenter extends readAndWritable{
         return false;
     }
     
-    // ==================== SERVICE REQUESTS ====================
+    // ==================== SERVICE REQUESTS OPERATIONS====================
     
     public void addPendingServiceRequest(Member member, String providerName, String serviceType) {
     	pendingServiceRequest.add(new ServiceRequest(member, providerName, serviceType));
@@ -225,7 +225,7 @@ public class DataCenter extends readAndWritable{
     	}
     }
     
-    // ==================== VALIDATION ====================
+    // ==================== VALIDATION OPERATIONS====================
     
     public boolean validMember(String name, String number) {
     	for(int i = 0;  i < members.size(); i++) {
@@ -237,7 +237,6 @@ public class DataCenter extends readAndWritable{
     
     // Written by Wheeler Knight on 12/5/2025 - Check if member is valid (not suspended)
     public String validateMemberCard(String memberNumber) {
-        // Check if member exists and is active
         for (Member m : members) {
             if (m.getCard().getMemberNumber().equals(memberNumber)) {
                 return "VALID";
@@ -288,6 +287,8 @@ public class DataCenter extends readAndWritable{
     }
     
     // ==================== LOOKUP METHODS ====================
+    // NOTE: THIS METHOD IS PARTIALLY GENERATED/EDITED BY AI (Curosr IDE) - Wheeler Knight
+    // REASONING: Unfamiliar with the java.time package and its methods, so I used AI to help me understand and implement the code.
     
     public java.util.List<ServiceRecord> getServiceRecordsForLastWeek() {
         java.time.LocalDate oneWeekAgo = java.time.LocalDate.now().minusWeeks(1);
@@ -319,6 +320,7 @@ public class DataCenter extends readAndWritable{
     }
     
     public double getServiceFeeByCode(int code) {
+        // gets service fee by the code, returns 0.0 if the code is not valid
         if (code >= 1 && code <= SERVICE_FEE_RATES.length) {
             return SERVICE_FEE_RATES[code - 1];
         }

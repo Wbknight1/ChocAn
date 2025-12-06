@@ -14,9 +14,7 @@ public class Person {
     protected String city;
     protected String state;
     protected String zipCode;
-    // Removed unused idNumber field - Wheeler Knight 12/4/2025
 
-    // Default constructor for Gson deserialization - Wheeler Knight 12/5/2025
     public Person() {}
 
     //Add getters setters and constructors
@@ -54,7 +52,6 @@ public class Person {
     public String getZipCode(){ return zipCode;}
     public void setZipCode(String zipCode) {this.zipCode = zipCode;}
     
-    // Written by Wheeler Knight on 12/4/2025 - Base returnInfo method for common fields
     public String returnBaseInfo() {
         return firstName + "_" + lastName + "_" + phoneNumber + "_" + address + "_" + city + "_" + state + "_" + zipCode;
     }

@@ -4,26 +4,16 @@ import java.util.*;
 import java.time.LocalDate;
 
 /**
- * Provider Report Generator
  * Written by Wheeler Knight on 12/5/2025
- * 
- * Generates weekly reports for individual providers showing:
- * - Provider name, number, address
- * - List of services provided (date, member name, service code, fee)
- * - Total consultations and total fee
  */
 public class ProviderReport {
 
-    /**
-     * Print a weekly service report for a specific provider
-     */
     public static void printProviderReport(Provider provider, DataCenter dataCenter) {
         if (provider == null) {
             System.out.println("Error: Provider is null");
             return;
         }
 
-        // Get service records for last week for this provider
         List<ServiceRecord> allRecords = dataCenter.getServiceRecordsForLastWeek();
         List<ServiceRecord> providerRecords = new ArrayList<>();
         
@@ -33,8 +23,7 @@ public class ProviderReport {
             }
         }
 
-        // Sort by date
-        Collections.sort(providerRecords, (r1, r2) -> {
+            Collections.sort(providerRecords, (r1, r2) -> {
             LocalDate d1 = r1.getServiceDate();
             LocalDate d2 = r2.getServiceDate();
             if (d1 == null && d2 == null) return 0;
@@ -101,9 +90,7 @@ public class ProviderReport {
         System.out.println("=========================================");
     }
 
-    /**
-     * Print provider reports for ALL providers who had consultations this week
-     */
+    /* Written by Wheeler Knight 12/05/2025 */
     public static void printAllProviderReports(DataCenter dataCenter) {
         System.out.println("\n");
         System.out.println("*****************************************");
@@ -111,7 +98,6 @@ public class ProviderReport {
         System.out.println("*****************************************");
         System.out.println();
 
-        // Find all providers who have records this week
         List<ServiceRecord> weeklyRecords = dataCenter.getServiceRecordsForLastWeek();
         Set<String> providerNumbers = new HashSet<>();
         
@@ -133,9 +119,6 @@ public class ProviderReport {
         }
     }
 
-    /**
-     * Export provider report to file
-     */
     public static void exportProviderReportToFile(Provider provider, DataCenter dataCenter, String filePath) {
         try (java.io.PrintWriter out = new java.io.PrintWriter(new java.io.FileWriter(filePath))) {
             List<ServiceRecord> allRecords = dataCenter.getServiceRecordsForLastWeek();

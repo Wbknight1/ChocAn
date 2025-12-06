@@ -999,7 +999,7 @@ public class Terminal extends JFrame {
 		java.util.List<ServiceRecord> weeklyRecords = sys.getServiceRecordsForLastWeek();
 		for (Member m : sys.getMembers()) {
 			if (m != null) {
-				MemberServiceReport.ReportGenerator.printMemberReport(m, weeklyRecords, sys);
+				MemberServiceReport.printMemberReport(m, weeklyRecords, sys);
 				System.out.println();
 			}
 		}

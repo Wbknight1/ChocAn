@@ -1,14 +1,18 @@
-# ChocAn Package Documentation
+# ChocAn Source Code
+**Group 11**:
+- Wheeler Knight
+- Rossy Hollinger
+- Logan Hernandez
+- Lindsey Bowen
+- Dylan Stokes
+- Esmeralda Gomez
 
-Written by Wheeler Knight on 12/4/2025
+## Overview
 
-## Package Overview
-
-The `chocan` package contains all classes for the Chocoholics Anonymous (ChocAn) 
+The `chocan` source code contains all classes for the Chocoholics Anonymous (ChocAn) 
 healthcare services management system.
 
 ## Class Descriptions
-
 ### Core Classes
 
 | Class | Description |
@@ -62,18 +66,12 @@ healthcare services management system.
 
 ## Data Format
 
-All data files use underscore (`_`) as field delimiter.
+- All data files are stored in '/database' and are in JSON format
+- All repots are outputted to the '/reports' folder
+- ETF Data from the accounting procedure and the provider directory are saved in the project root
 
-**Member Format:** `FirstName_LastName_Phone_Address_City_State_Zip_Email_Number`
-
-**Provider Format:** `FirstName_LastName_Phone_Address_City_State_Zip_Number`
-
-**Manager Format:** `FirstName_LastName_Phone_Address_City_State_Zip_Number`
-
-**ServiceRecord Format:** `ProviderNumber_MemberNumber_ServiceCode_Fee_Date`
 
 ## Service Codes
-
 | Code | Service | Fee |
 |------|---------|-----|
 | 1 | CONSULTATION | $12.99 |

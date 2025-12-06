@@ -2,10 +2,11 @@ package chocan;
 
 public class ACMEAccountingServices{
 	
-	private Member[] members;
-	private Member[] suspendedMembers; //ACME's list of suspended members, should talk to VerifyMember
-	private boolean memberValidationEnabled = true;
+	private Member[] members; // List of memebrs
+	private Member[] suspendedMembers;  // List of suspendedMembers
+	private boolean memberValidationEnabled = true; // If member can be validated, default set to true
     
+    // Contructor
     public ACMEAccountingServices(Member[] members, Member[] suspendedMembers) {
     	
     	this.members = members;
@@ -13,6 +14,7 @@ public class ACMEAccountingServices{
     	
     }
     
+    /*GETTERS AND SETTERS FOR MEMBERS AND SUSPENDED MEMBERS*/
     public void setMembers(Member[] members) {
     	this.members = members;
     }
@@ -31,18 +33,16 @@ public class ACMEAccountingServices{
     	this.suspendedMembers = suspendedMembers;
     }
     
+
     // Edited by Wheeler Knight on 12/4/2025 - Implemented suspendMember functionality
     public void suspendMember(String number) {
     	for(int i = 0; i < members.length; i++) {
     		if(members[i].getCard().getMemberNumber().equals(number)) {
-    			// Add to suspended members array
     			Member memberToSuspend = members[i];
     			Member[] newSuspended = new Member[suspendedMembers.length + 1];
     			System.arraycopy(suspendedMembers, 0, newSuspended, 0, suspendedMembers.length);
     			newSuspended[suspendedMembers.length] = memberToSuspend;
     			this.suspendedMembers = newSuspended;
-    			
-    			// Remove from active members array
     			Member[] newMembers = new Member[members.length - 1];
     			int idx = 0;
     			for(int j = 0; j < members.length; j++) {
@@ -59,18 +59,16 @@ public class ACMEAccountingServices{
     	System.out.println("Member not found with number: " + number);
     }
     
+
     // Written by Wheeler Knight on 12/4/2025 - Implemented unsuspendMember functionality
     public void unsuspendMember(String number) {
     	for(int i = 0; i < suspendedMembers.length; i++) {
     		if(suspendedMembers[i].getCard().getMemberNumber().equals(number)) {
-    			// Add to active members array
     			Member memberToUnsuspend = suspendedMembers[i];
     			Member[] newMembers = new Member[members.length + 1];
     			System.arraycopy(members, 0, newMembers, 0, members.length);
     			newMembers[members.length] = memberToUnsuspend;
     			this.members = newMembers;
-    			
-    			// Remove from suspended members array
     			Member[] newSuspended = new Member[suspendedMembers.length - 1];
     			int idx = 0;
     			for(int j = 0; j < suspendedMembers.length; j++) {
@@ -79,7 +77,6 @@ public class ACMEAccountingServices{
     				}
     			}
     			this.suspendedMembers = newSuspended;
-    			
     			System.out.println("Member unsuspended: " + memberToUnsuspend.getFirstName() + " " + memberToUnsuspend.getLastName());
     			return;
     		}
@@ -97,7 +94,8 @@ public class ACMEAccountingServices{
             return;
         }
     }
-    // Add to members array (grow array)
+
+    // Add to members array
     Member[] newMembers = new Member[members.length + 1];
     System.arraycopy(members, 0, newMembers, 0, members.length);
     newMembers[members.length] = member;
@@ -108,33 +106,16 @@ public class ACMEAccountingServices{
 
     // Written by Wheeler Knight 12/04/2025
     public void ToggleValidation() {
-    /*
-     * This method toggles member validation mode.
-     * In the ACMEAccountingServices system, validation mode determines whether member card validation is enforced
-     * when processing services, i.e., whether providers are required to check if a member is valid before proceeding.
-     * For demonstration, we add a boolean field called memberValidationEnabled.
-     */
-    // We'll assume the following field somewhere in this class:
-    // private boolean memberValidationEnabled = true;
-
     this.memberValidationEnabled = !this.memberValidationEnabled;
     System.out.println("Member card validation is now " + (this.memberValidationEnabled ? "ENABLED" : "DISABLED") + ".");
     };
 
     // Written by Wheeler Knight 12/04/2025
+    // NOTE: THIS METHOD IS PARTIALLY GENERATED/EDITED BY AI (Curosr IDE)
     public void BillMembers() {
-        /*
-         * This method will generate a bill for each member who has received services,
-         * based on the service records available (typically for the week).
-         * For each member, print out their name, member number, and the total fee due for all services received.
-         * Optionally, show details of each service.
-         * Assumes there is a DataCenter or equivalent object storing service records.
-         */
-
         System.out.println("=== Billing Members ===");
-        DataCenter dataCenter = new DataCenter(); // In real code, you would inject this dependency.
+        DataCenter dataCenter = new DataCenter();
         java.util.List<ServiceRecord> records = dataCenter.getServiceRecords();
-
         java.util.Map<String, Double> memberTotalFees = new java.util.HashMap<>();
         java.util.Map<String, java.util.List<ServiceRecord>> memberServices = new java.util.HashMap<>();
 
@@ -145,7 +126,6 @@ public class ACMEAccountingServices{
             try {
                 fee = sr.getServiceFee();
             } catch (Exception e) {
-                // If ServiceRecord doesn't store fee, attempt to look it up
                 try {
                     int code = Integer.parseInt(sr.getServiceCode());
                     if (code >= 1 && code <= dataCenter.SERVICE_FEE_RATES.length) {
@@ -178,7 +158,6 @@ public class ACMEAccountingServices{
                 String dateStr = sr.getServiceDate() != null ? sr.getServiceDate().toString() : "";
                 String providerName = "Unknown";
                 Provider prov = dataCenter.getProviderByNumber(sr.getProviderNumber());
-                // Edited by Wheeler Knight on 12/4/2025 - Changed to use getFullName() instead of duplicate getName()
                 if (prov != null) providerName = prov.getFullName();
                 String serviceName = "Unknown";
                 try {
