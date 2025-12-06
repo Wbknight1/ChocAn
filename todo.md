@@ -1,2 +1,1 @@
-- [] Reformat comments and make a list of lines or functionality that is ai generated, and comment specifically in the source code
 - [] Dockerize the application so you can ship, compile, and run it on different systems and environments

@@ -89,11 +89,9 @@ public class Provider extends Person {
             form.setNumber(memberNumber);
 
             String memberName = "";
-            Member memberFound = null;
             for (Member m : accounting.getMembers()) {
                 if (m.getCard().getMemberNumber().equals(memberNumber)) {
                     memberName = m.getFirstName() + " " + m.getLastName();
-                    memberFound = m;
                     break;
                 }
             }

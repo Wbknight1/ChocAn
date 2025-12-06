@@ -1,26 +1,16 @@
 package chocan;
+
 /* Written by Logan Hernandez 12/05/2025 */
 
-public class ACMEAccountingServices{
-	
-	private Member[] members; // List of memebrs
-	private Member[] suspendedMembers;  // List of suspendedMembers
-	private boolean memberValidationEnabled = true; // If member can be validated, default set to true
-    
-    // Contructor
+public class ACMEAccountingServices {
+    private Member[] members;
+    private Member[] suspendedMembers;
+    private boolean memberValidationEnabled;
+
     public ACMEAccountingServices(Member[] members, Member[] suspendedMembers) {
-    	
-    	this.members = members;
-    	this.suspendedMembers = suspendedMembers;
-    	
-    }
-    
-    /*GETTERS AND SETTERS FOR MEMBERS AND SUSPENDED MEMBERS*/
-    public void setMembers(Member[] members) {
-    	this.members = members;
-    }
-    
-    
+        this.members = members;
+    };
+
     public Member[] getMembers() {
     	return members;
     }

@@ -189,20 +189,5 @@
     "city": "Mobile",
     "state": "Alabama",
     "zipCode": "36602"
-  },
-  {
-    "email": "johncena@wwe.com",
-    "memberCard": {
-      "memberFirstName": "John",
-      "memberLastName": "Cena",
-      "memberNumber": "17899"
-    },
-    "firstName": "John",
-    "lastName": "Cena",
-    "phoneNumber": "123-456-7891",
-    "address": "123 Boulevard Ave",
-    "city": "Tuscaloosa",
-    "state": "AL",
-    "zipCode": "35401"
   }
 ]

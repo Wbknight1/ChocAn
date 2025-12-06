@@ -40,25 +40,23 @@ public class Member extends Person {
 
     /**
      * Written by Wheeler Knight 12/04/2025
+     * Scanner try/catch wrappen written with the help of AI Agent
      */
     public void RequestHealthService() {
-        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        try (java.util.Scanner scanner = new java.util.Scanner(System.in)) {
+            System.out.println("=== Request Health Service ===");
+            System.out.print("Enter the provider's name: ");
+            String providerName = scanner.nextLine().trim();
 
+            System.out.print("Enter the type of service: ");
+            String serviceType = scanner.nextLine().trim();
 
-        System.out.println("=== Request Health Service ===");
-        System.out.print("Enter the provider's name: ");
-        String providerName = scanner.nextLine().trim();
+            ServiceRequest request = new ServiceRequest(this, providerName, serviceType);
 
-
-        System.out.print("Enter the type of service: ");
-        String serviceType = scanner.nextLine().trim();
-
-        ServiceRequest request = new ServiceRequest(this, providerName, serviceType);
-
-        System.out.println("Service request created:");
-        System.out.println("  Member Number: " + request.member.getCard().getMemberNumber());
-        System.out.println("  Provider: " + request.providerName);
-        System.out.println("  Service Type: " + request.serviceType);
-
+            System.out.println("Service request created:");
+            System.out.println("  Member Number: " + request.member.getCard().getMemberNumber());
+            System.out.println("  Provider: " + request.providerName);
+            System.out.println("  Service Type: " + request.serviceType);
+        }
     }
 }

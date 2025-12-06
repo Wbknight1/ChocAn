@@ -86,15 +86,5 @@
     "city": "Birmingham",
     "state": "AL",
     "zipCode": "35203"
-  },
-  {
-    "providerNumber": "181818",
-    "firstName": "Nick",
-    "lastName": "Saban",
-    "phoneNumber": "256-290-8877",
-    "address": "1900 Champions Drive",
-    "city": "Tuscaloosa",
-    "state": "AL",
-    "zipCode": "35401"
   }
 ]

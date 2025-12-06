@@ -3,8 +3,8 @@
 This class implements the running terminal functions. It houses the swing gui
 
 WRITER NOTE: 
-The majority of this class (~800 lines) was written by Logan Hernandez.
-Wheeler Knight prototyped Logan's initial GUI through AI assistance for testing purposes, and the conflicts were merged between the two.
+The majority of this class (~700 lines) was written by Logan Hernandez.
+Wheeler Knight prototyped Logan's initial GUI through AI assistance for testing purposes, and the conflicts were merged between the two. 
  */
 
 package chocan;
